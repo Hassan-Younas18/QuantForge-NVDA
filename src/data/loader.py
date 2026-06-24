@@ -10,6 +10,7 @@ available, then cache to parquet to avoid hammering the API on re-runs.
 from __future__ import annotations
 
 import logging
+import os
 import time
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -86,7 +87,13 @@ def download_data(cfg: DataConfig, retries: int = 3) -> pd.DataFrame:
             df = df.sort_index()
             df.index.name = "Date"
             if cfg.use_cache:
-                df.to_parquet(cache)
+                # Write to a temp file then atomically replace the cache path —
+                # concurrent requests (e.g. the API serving history + indicators
+                # for the same ticker at once) would otherwise race on writing
+                # the same file and corrupt it.
+                tmp = cache.with_suffix(f".{os.getpid()}.tmp")
+                df.to_parquet(tmp)
+                os.replace(tmp, cache)
                 logger.info("Cached -> %s", cache)
             logger.info("Downloaded %d rows (%s -> %s)",
                         len(df), df.index.min().date(), df.index.max().date())
