@@ -13,6 +13,28 @@ produces 1 / 7 / 30-trading-day forecasts with confidence intervals.
 > brutally strong baseline** that deep nets rarely beat in any economically
 > meaningful way.
 
+For the full technical write-up (architecture, methodology, model
+internals, and why each design choice was made), see
+[`PROJECT_REPORT.md`](PROJECT_REPORT.md).
+
+---
+
+## Screenshots
+
+The pipeline is also exposed as a FastAPI backend + React/TypeScript/Tailwind
+dashboard (see §8 below). A few views:
+
+| Dashboard | History |
+|---|---|
+| ![Dashboard](screenshots/dashboard.png) | ![History](screenshots/history.png) |
+
+| Predictions | Models |
+|---|---|
+| ![Predictions](screenshots/predictions.png) | ![Models](screenshots/models.png) |
+
+**Insights**
+![Insights](screenshots/insights.png)
+
 ---
 
 ## 1. Quick start
