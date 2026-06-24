@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+.venv/
+.DS_Store
+outputs/models/*.pt
+outputs/models/scalers/*.joblib
+outputs/plots/*.png
+outputs/results/*.json
+outputs/results/*.csv
+outputs/data_cache/*.parquet
+!outputs/**/.gitkeep
+
+# Backend/frontend local artefacts
+backend/__pycache__/
+backend.egg-info/

@@ -1,0 +1,5 @@
+# Backend-only additions on top of the root requirements.txt
+# (install both: pip install -r requirements.txt -r backend/requirements.txt)
+fastapi>=0.110
+uvicorn[standard]>=0.27
+pydantic-settings>=2.2
